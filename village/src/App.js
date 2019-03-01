@@ -31,6 +31,13 @@ class App extends Component {
       .catch(console.log);
   };
 
+  deleteSmurf = id => {
+    axios
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then(({ data }) => this.setState({ smurfs: data }))
+      .catch(console.log);
+  };
+
   render() {
     return (
       <div className="App">
@@ -45,7 +52,9 @@ class App extends Component {
         <Route
           path="/"
           exact
-          render={() => <Smurfs smurfs={this.state.smurfs} />}
+          render={() => (
+            <Smurfs smurfs={this.state.smurfs} deleteSmurf={this.deleteSmurf} />
+          )}
         />
       </div>
     );
